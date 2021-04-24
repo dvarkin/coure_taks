@@ -1,2 +1,2 @@
-# coure_taks
+# course_taks
 Data Structures and Algorithms course tasks
