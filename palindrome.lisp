@@ -9,16 +9,19 @@
 	 (is_palindrome? (subseq num_str 1 end))))))
 
 (defun calc_palindrome (a b)
+;;  (format t "~a*~a=~a" a b (* a b))
   (let* ((product (* a b))
 	 (num_str (write-to-string product)))
-    (when (is_palindrome? num_str)
-      product)))
+    (if (is_palindrome? num_str)
+	product
+	0)
+    ))
 
 
 (defun euler-4 ()
-  (loop named loop-1 for a in *nlist*
-	do (loop  for b in *nlist*
-		  when (is_palindrome? (write-to-string  (* a b)))
-		    do  (progn (format t "~a*~a=~a" a b (* a b))
-			 (return-from loop-1 (* a b))))))
+  (reduce #'max
+   (loop for a in *nlist*
+	 append (loop for b in *nlist* 
+		      collect (calc_palindrome  a b)
+		      ))))
 
